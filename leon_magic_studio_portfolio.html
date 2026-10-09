@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muthu Kumar | Leon Magic Studio — Indie Game Developer</title>
+  <meta name="description" content="Explore the games and projects of Muthu Kumar, indie game developer and creator of Leon Magic Studio. Specializing in Roblox, 3D worlds, mechanics, and open-world experiences.">
+  <meta name="keywords" content="Muthu Kumar, Leon Magic Studio, Game Developer, Roblox Developer, Indie Games, 3D Games, Ghilli The Game, Checkpoint Impossible">
+  <meta property="og:title" content="Muthu Kumar | Leon Magic Studio — Indie Game Developer">
+  <meta property="og:description" content="From 2D experiments to immersive 3D adventures, explore worlds built by Muthu Kumar.">
+  <meta property="og:type" content="website">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Google Fonts: Orbitron & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg: '#050611',
+              card: '#0B1024',
+              surface: 'rgba(11, 16, 36, 0.75)',
+              border: 'rgba(59, 130, 246, 0.25)',
+              purple: '#A855F7',
+              blue: '#3B82F6',
+              cyan: '#22D3EE',
+              muted: '#A7AEC5',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Orbitron', 'sans-serif'],
+          },
+          boxShadow: {
+            'neon-cyan': '0 0 25px rgba(34, 211, 238, 0.35)',
+            'neon-purple': '0 0 25px rgba(168, 85, 247, 0.35)',
+            'neon-blue': '0 0 25px rgba(59, 130, 246, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-dark: #050611;
+      --card-dark: #0B1024;
+      --neon-purple: #A855F7;
+      --neon-blue: #3B82F6;
+      --neon-cyan: #22D3EE;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: #FFFFFF;
+      overflow-x: hidden;
+    }
+
+    /* Custom futuristic scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050611;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #A855F7, #22D3EE);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #22D3EE;
+    }
+
+    /* Glassmorphism utility */
+    .glass-panel {
+      background: rgba(11, 16, 36, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    .glass-panel-hover:hover {
+      border-color: rgba(34, 211, 238, 0.6);
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+    }
+
+    /* Cyber gradient text */
+    .text-gradient-cyber {
+      background: linear-gradient(135deg, #22D3EE 0%, #3B82F6 50%, #A855F7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .text-gradient-purple {
+      background: linear-gradient(135deg, #FFFFFF 0%, #E9D5FF 60%, #A855F7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Custom Cyber Cursor (Desktop Only) */
+    @media (hover: hover) and (pointer: fine) {
+      .cyber-cursor {
+        width: 24px;
+        height: 24px;
+        border: 2px solid #22D3EE;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.08s ease-out, border-color 0.2s, background-color 0.2s;
+        z-index: 9999;
+      }
+      .cyber-cursor-dot {
+        width: 6px;
+        height: 6px;
+        background-color: #A855F7;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        z-index: 10000;
+      }
+      .cyber-cursor.hovering {
+        transform: translate(-50%, -50%) scale(1.6);
+        background-color: rgba(34, 211, 238, 0.15);
+        border-color: #A855F7;
+      }
+    }
+
+    /* Reduce effects overrides */
+    .reduced-effects * {
+      animation: none !important;
+      transition: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</head>
+<body class="selection:bg-cyan-500 selection:text-black">
+
+  <!-- Desktop Custom Cursor -->
+  <div id="customCursor" class="cyber-cursor hidden md:block"></div>
+  <div id="customCursorDot" class="cyber-cursor-dot hidden md:block"></div>
+
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-4 sm:px-8 border-b border-transparent">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Studio Brand / Logo -->
+      <a href="#hero" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded-lg p-1">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-blue-600 to-cyan-400 p-[2px] transition-transform group-hover:scale-105 shadow-neon-cyan">
+          <div class="w-full h-full bg-[#050611] rounded-[10px] flex items-center justify-center">
+            <span class="font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 text-lg">LM</span>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-bold tracking-wider text-base text-white group-hover:text-cyan-400 transition-colors">LEON MAGIC STUDIO</span>
+          <span class="text-[10px] uppercase tracking-widest text-brand-muted font-mono hidden sm:inline-block">GAMES · IMAGINATION · BEYOND LIMITS</span>
+        </div>
+      </a>
+
+      <!-- Center Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-8 bg-[#0B1024]/70 px-6 py-2.5 rounded-full border border-blue-500/20 backdrop-blur-md shadow-lg" aria-label="Main Navigation">
+        <a href="#hero" class="nav-link text-sm font-medium text-brand-muted hover:text-cyan-300 transition-colors py-1" data-section="hero">Home</a>
+        <a href="#about" class="nav-link text-sm font-medium text-brand-muted hover:text-cyan-300 transition-colors py-1" data-section="about">About</a>
+        <a href="#games" class="nav-link text-sm font-medium text-brand-muted hover:text-cyan-300 transition-colors py-1" data-section="games">Games</a>
+        <a href="#development" class="nav-link text-sm font-medium text-brand-muted hover:text-cyan-300 transition-colors py-1" data-section="development">Development</a>
+        <a href="#skills" class="nav-link text-sm font-medium text-brand-muted hover:text-cyan-300 transition-colors py-1" data-section="skills">Skills</a>
+        <a href="#contact" class="nav-link text-sm font-medium text-brand-muted hover:text-cyan-300 transition-colors py-1" data-section="contact">Contact</a>
+      </nav>
+
+      <!-- Right Action Items & Socials -->
+      <div class="hidden sm:flex items-center gap-4">
+        <a href="https://www.instagram.com/leon_gx_/" target="_blank" rel="noopener noreferrer" 
+           class="p-2.5 rounded-lg text-brand-muted hover:text-cyan-400 hover:bg-white/5 transition-all" 
+           aria-label="Instagram @leon_gx_" title="Follow on Instagram @leon_gx_">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+
+        <a id="navYoutubeBtn" href="#" target="_blank" rel="noopener noreferrer" 
+           class="p-2.5 rounded-lg text-brand-muted hover:text-red-400 hover:bg-white/5 transition-all" 
+           aria-label="YouTube Channel" title="YouTube Channel (Configurable)">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <!-- Effects Toggle Button -->
+        <button id="toggleEffectsBtn" class="px-2.5 py-1.5 rounded-lg border border-brand-border text-xs font-mono text-cyan-300 hover:bg-cyan-500/10 transition-colors" title="Toggle FX for low performance">
+          FX: ON
+        </button>
+
+        <a href="#contact" class="px-5 py-2.5 rounded-xl font-display text-xs tracking-wider font-bold bg-gradient-to-r from-cyan-400 to-blue-600 text-black hover:opacity-90 transition-all shadow-neon-cyan hover:scale-[1.02]">
+          LET'S TALK
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuToggle" class="lg:hidden p-2 text-brand-muted hover:text-white focus:outline-none" aria-label="Toggle mobile navigation menu" aria-expanded="false">
+        <svg id="hamburgerIcon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobileMenu" class="lg:hidden hidden mt-4 px-4 py-6 bg-[#0B1024]/95 border border-cyan-500/20 backdrop-blur-xl rounded-2xl flex flex-col gap-4 text-center transition-all shadow-2xl">
+      <a href="#hero" class="mobile-nav-link text-base font-medium py-2 text-white hover:text-cyan-400 transition-colors">Home</a>
+      <a href="#about" class="mobile-nav-link text-base font-medium py-2 text-white hover:text-cyan-400 transition-colors">About</a>
+      <a href="#games" class="mobile-nav-link text-base font-medium py-2 text-white hover:text-cyan-400 transition-colors">Games</a>
+      <a href="#development" class="mobile-nav-link text-base font-medium py-2 text-white hover:text-cyan-400 transition-colors">Development</a>
+      <a href="#skills" class="mobile-nav-link text-base font-medium py-2 text-white hover:text-cyan-400 transition-colors">Skills</a>
+      <a href="#contact" class="mobile-nav-link text-base font-medium py-2 text-white hover:text-cyan-400 transition-colors">Contact</a>
+      <div class="h-[1px] bg-white/10 my-1"></div>
+      <div class="flex justify-center gap-6 py-2">
+        <a href="https://www.instagram.com/leon_gx_/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 text-sm flex items-center gap-1.5">
+          <span>Instagram</span>
+        </a>
+        <button id="mobileToggleEffectsBtn" class="text-brand-muted text-sm border border-brand-border px-3 py-1 rounded-md">FX: ON</button>
+      </div>
+      <a href="#contact" class="w-full py-3 rounded-xl font-display text-xs tracking-wider font-bold bg-gradient-to-r from-cyan-400 to-blue-600 text-black">LET'S TALK</a>
+    </div>
+  </header>
+
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    
+    <!-- Three.js 3D Canvas Canvas Container -->
+    <div id="canvas-container" class="absolute inset-0 z-0 w-full h-full pointer-events-auto">
+      <!-- Fallback container in case WebGL is disabled or unsupported -->
+      <div id="webgl-fallback" class="hidden absolute inset-0 bg-gradient-to-b from-[#050611] via-[#0B1024] to-[#050611] flex items-center justify-center text-center p-6">
+        <div class="glass-panel p-6 rounded-2xl max-w-md">
+          <p class="text-brand-cyan font-mono text-sm uppercase">2D Mode Active</p>
+          <p class="text-brand-muted text-xs mt-1">WebGL is disabled or unsupported on this device. Displaying optimized background.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gradient overlay to blend bottom into content seamlessly -->
+    <div class="absolute inset-0 z-[1] bg-gradient-to-t from-[#050611] via-transparent to-[#050611]/60 pointer-events-none"></div>
+
+    <!-- Hero Content Overlay -->
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
+      
+      <!-- Developer Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 font-mono text-xs uppercase tracking-widest backdrop-blur-md mb-6 animate-pulse">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-neon-cyan"></span>
+        MUTHU KUMAR · FOUNDER & SOLO INDIE DEV
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-none mb-6">
+        <span class="block text-white">I CREATE GAMES.</span>
+        <span class="block text-gradient-cyber mt-2">I BUILD WORLDS.</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="max-w-2xl text-base sm:text-lg text-brand-muted font-normal leading-relaxed mb-8">
+        From 2D experiments to immersive 3D adventures, I create unique gaming experiences across Roblox, PC, and mobile platforms.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
+        <a href="#games" class="px-7 py-3.5 rounded-xl font-display text-xs tracking-wider font-bold bg-gradient-to-r from-cyan-400 to-blue-600 text-black hover:shadow-neon-cyan hover:scale-105 transition-all">
+          EXPLORE MY GAMES
+        </a>
+        <a href="#development" class="px-7 py-3.5 rounded-xl font-display text-xs tracking-wider font-bold bg-[#0B1024]/80 text-white border border-purple-500/40 hover:border-purple-400 hover:shadow-neon-purple hover:scale-105 transition-all backdrop-blur-md">
+          GAMES IN DEVELOPMENT
+        </a>
+        <a href="#contact" class="px-7 py-3.5 rounded-xl font-display text-xs tracking-wider font-bold bg-transparent text-brand-muted border border-white/20 hover:text-white hover:border-white transition-all">
+          CONTACT ME
+        </a>
+      </div>
+
+      <!-- Live Honest Statistics (Configurable) -->
+      <div class="grid grid-cols-3 gap-4 sm:gap-12 w-full max-w-xl glass-panel p-4 sm:p-6 rounded-2xl shadow-xl">
+        <div class="text-center">
+          <div id="statProjects" class="font-display text-2xl sm:text-4xl font-black text-cyan-400">12+</div>
+          <div class="text-[11px] sm:text-xs text-brand-muted tracking-wider uppercase font-mono mt-1">Game Projects</div>
+        </div>
+        <div class="text-center border-x border-white/10 px-2">
+          <div id="statDeveloper" class="font-display text-2xl sm:text-4xl font-black text-purple-400">1</div>
+          <div class="text-[11px] sm:text-xs text-brand-muted tracking-wider uppercase font-mono mt-1">Indie Developer</div>
+        </div>
+        <div class="text-center">
+          <div id="statIdeas" class="font-display text-2xl sm:text-4xl font-black text-blue-400">∞</div>
+          <div class="text-[11px] sm:text-xs text-brand-muted tracking-wider uppercase font-mono mt-1">Infinite Ideas</div>
+        </div>
+      </div>
+
+      <!-- Tagline banner -->
+      <div class="mt-8 font-mono text-[11px] sm:text-xs tracking-widest text-cyan-300/80 uppercase">
+        “START WHERE YOU ARE, USE WHAT YOU HAVE, BUILD WHAT YOU DREAM.”
+      </div>
+
+      <!-- Scroll Indicator -->
+      <a href="#about" class="mt-10 flex flex-col items-center text-brand-muted hover:text-cyan-400 transition-colors group" aria-label="Scroll to About section">
+        <span class="text-[10px] tracking-widest font-mono uppercase mb-2 group-hover:text-cyan-300">EXPLORE</span>
+        <div class="w-5 h-9 rounded-full border-2 border-brand-muted/40 group-hover:border-cyan-400 flex items-start justify-center p-1">
+          <div class="w-1.5 h-2 bg-cyan-400 rounded-full animate-bounce"></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section id="about" class="relative py-28 px-4 sm:px-8 border-t border-blue-900/20">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-mono tracking-widest uppercase text-purple-400 bg-purple-950/40 px-3 py-1 rounded-full border border-purple-500/30">BEHIND THE SCREEN</span>
+        <h2 class="font-display text-3xl sm:text-5xl font-black mt-3 mb-4">THE DEVELOPER BEHIND THE GAMES</h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-cyan-400 mx-auto rounded-full"></div>
+      </div>
+
+      <!-- Split Layout: Profile Card + Bio -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left: Stylized 3D Tilt Developer Portrait Frame -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div id="portraitCard" class="relative w-full max-w-md group transition-transform duration-200 ease-out">
+            <div class="absolute -inset-2 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 rounded-3xl blur-xl opacity-40 group-hover:opacity-75 transition-opacity"></div>
+            
+            <div class="relative rounded-2xl glass-panel p-6 overflow-hidden border border-cyan-500/40 shadow-2xl">
+              <!-- Holographic header bar -->
+              <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6 font-mono text-xs">
+                <span class="text-cyan-400 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                  OPERATOR: ONLINE
+                </span>
+                <span class="text-brand-muted">LEON MAGIC STUDIO</span>
+              </div>
+
+              <!-- Character Illustration / Developer Avatar -->
+              <div class="relative aspect-square w-full rounded-xl bg-gradient-to-b from-[#101736] to-[#060814] border border-blue-500/30 overflow-hidden flex items-center justify-center">
+                <!-- Procedural Cyber Avatar SVG -->
+                <svg viewBox="0 0 400 400" class="w-full h-full object-cover p-4" aria-label="Muthu Kumar Avatar Silhouette">
+                  <defs>
+                    <radialGradient id="avatarGlow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.3" />
+                      <stop offset="100%" stop-color="#050611" stop-opacity="0" />
+                    </radialGradient>
+                    <linearGradient id="cyberSuit" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#3B82F6" />
+                      <stop offset="100%" stop-color="#A855F7" />
+                    </linearGradient>
+                  </defs>
+                  <!-- Background grid -->
+                  <circle cx="200" cy="200" r="160" fill="url(#avatarGlow)" />
+                  <circle cx="200" cy="200" r="140" fill="none" stroke="#22D3EE" stroke-width="1" stroke-dasharray="8 6" opacity="0.4" />
+                  
+                  <!-- Character Silhouette Details -->
+                  <!-- Head -->
+                  <circle cx="200" cy="140" r="50" fill="#0B1024" stroke="#22D3EE" stroke-width="2" />
+                  <!-- Visor / Cyber Goggles -->
+                  <path d="M170 135 Q200 130 230 135 L226 150 Q200 146 174 150 Z" fill="#22D3EE" />
+                  <line x1="170" y1="142" x2="230" y2="142" stroke="#FFFFFF" stroke-width="2" />
+                  <!-- Hair/Headphones -->
+                  <path d="M150 130 C150 90 250 90 250 130" stroke="#A855F7" stroke-width="6" fill="none" />
+                  <rect x="145" y="125" width="10" height="25" rx="4" fill="#A855F7" />
+                  <rect x="245" y="125" width="10" height="25" rx="4" fill="#A855F7" />
+                  <!-- Torso / Hoodie / Suit -->
+                  <path d="M130 290 Q200 240 270 290 L290 380 L110 380 Z" fill="url(#cyberSuit)" opacity="0.9" />
+                  <!-- Inner collar -->
+                  <path d="M170 200 L200 240 L230 200 Z" fill="#050611" stroke="#22D3EE" stroke-width="2" />
+                  <!-- Monogram LMS -->
+                  <text x="200" y="320" font-family="Orbitron" font-weight="900" font-size="28" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">LMS</text>
+                  <!-- Holographic HUD Rings -->
+                  <circle cx="200" cy="200" r="175" fill="none" stroke="#A855F7" stroke-width="1" stroke-opacity="0.3"/>
+                </svg>
+
+                <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-md border border-cyan-500/30 text-[11px] font-mono text-cyan-300">
+                  ID: MUTHU_KUMAR
+                </div>
+              </div>
+
+              <!-- Character Status Card footer -->
+              <div class="mt-6 flex items-center justify-between font-mono text-xs text-brand-muted">
+                <div>
+                  <span class="block text-white font-semibold">ROLE</span>
+                  <span>Solo Indie Dev</span>
+                </div>
+                <div>
+                  <span class="block text-white font-semibold">LOCATION</span>
+                  <span>Tamil Nadu, India</span>
+                </div>
+                <div>
+                  <span class="block text-white font-semibold">EXPERIENCE</span>
+                  <span>2D · 3D · Roblox</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Bio + Pillar Highlights -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="glass-panel p-8 rounded-2xl border border-white/10">
+            <h3 class="font-display text-2xl font-bold text-white mb-4">Hello World! I'm Muthu Kumar</h3>
+            <p class="text-brand-muted text-base leading-relaxed mb-4">
+              I'm Muthu Kumar, an indie game developer and the creator behind <span class="text-cyan-400 font-semibold">Leon Magic Studio</span>. I enjoy building interactive worlds, designing gameplay mechanics, experimenting with 2D and 3D game development, and creating memorable experiences for players.
+            </p>
+            <p class="text-brand-muted text-base leading-relaxed">
+              My projects range from challenging obstacle games and action battles to horror adventures and open-world experiences. Every project is an opportunity to learn, experiment, and build something new.
+            </p>
+          </div>
+
+          <!-- Highlight Cards Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <div class="glass-panel p-5 rounded-xl border border-purple-500/20 hover:border-purple-400/60 transition-all group">
+              <div class="w-10 h-10 rounded-lg bg-purple-950/70 border border-purple-500/40 flex items-center justify-center mb-3 text-purple-400 group-hover:scale-110 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/></svg>
+              </div>
+              <h4 class="font-display text-base font-bold text-white mb-1">Creative Game Dev</h4>
+              <p class="text-xs text-brand-muted leading-relaxed">Crafting original gameplay, vibrant aesthetics, and captivating atmosphere from blank canvases.</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-xl border border-blue-500/20 hover:border-blue-400/60 transition-all group">
+              <div class="w-10 h-10 rounded-lg bg-blue-950/70 border border-blue-500/40 flex items-center justify-center mb-3 text-blue-400 group-hover:scale-110 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              </div>
+              <h4 class="font-display text-base font-bold text-white mb-1">Gameplay Systems</h4>
+              <p class="text-xs text-brand-muted leading-relaxed">Scripting robust movement, check-point progression, slap combat, and physics interactions.</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-xl border border-cyan-500/20 hover:border-cyan-400/60 transition-all group">
+              <div class="w-10 h-10 rounded-lg bg-cyan-950/70 border border-cyan-500/40 flex items-center justify-center mb-3 text-cyan-400 group-hover:scale-110 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+              </div>
+              <h4 class="font-display text-base font-bold text-white mb-1">Interactive Worlds</h4>
+              <p class="text-xs text-brand-muted leading-relaxed">Designing open streets, horror interiors, floating islands, and festival event spaces.</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-xl border border-emerald-500/20 hover:border-emerald-400/60 transition-all group">
+              <div class="w-10 h-10 rounded-lg bg-emerald-950/70 border border-emerald-500/40 flex items-center justify-center mb-3 text-emerald-400 group-hover:scale-110 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <h4 class="font-display text-base font-bold text-white mb-1">Continuous Learning</h4>
+              <p class="text-xs text-brand-muted leading-relaxed">Exploring new engines, Luau, Godot, computer vision tools, and modern shaders daily.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="games" class="relative py-28 px-4 sm:px-8 bg-[#070919] border-t border-cyan-900/20">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-mono tracking-widest uppercase text-cyan-400 bg-cyan-950/40 px-3 py-1 rounded-full border border-cyan-500/30">DISCOVER EXPERIENCES</span>
+        <h2 class="font-display text-3xl sm:text-5xl font-black mt-3 mb-4">MY GAMES</h2>
+        <p class="text-brand-muted text-base">Explore my released games, ongoing projects, and upcoming experiences.</p>
+        <div class="w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full mt-4"></div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12" role="tablist" aria-label="Game Filter Options">
+        <button class="game-filter-btn px-5 py-2 rounded-full font-mono text-xs tracking-wider uppercase transition-all bg-cyan-500 text-black font-bold shadow-neon-cyan" data-filter="all">All Games</button>
+        <button class="game-filter-btn px-5 py-2 rounded-full font-mono text-xs tracking-wider uppercase transition-all bg-[#0B1024] text-brand-muted hover:text-white border border-white/10" data-filter="released">Released</button>
+        <button class="game-filter-btn px-5 py-2 rounded-full font-mono text-xs tracking-wider uppercase transition-all bg-[#0B1024] text-brand-muted hover:text-white border border-white/10" data-filter="in-development">In Development</button>
+        <button class="game-filter-btn px-5 py-2 rounded-full font-mono text-xs tracking-wider uppercase transition-all bg-[#0B1024] text-brand-muted hover:text-white border border-white/10" data-filter="final-stage">Final Stage</button>
+        <button class="game-filter-btn px-5 py-2 rounded-full font-mono text-xs tracking-wider uppercase transition-all bg-[#0B1024] text-brand-muted hover:text-white border border-white/10" data-filter="coming-soon">Coming Soon</button>
+      </div>
+
+      <!-- Games Grid (Populated dynamically via JavaScript) -->
+      <div id="gamesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rendered by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <section id="development" class="relative py-28 px-4 sm:px-8 border-t border-purple-900/20">
+    <div class="max-w-7xl mx-auto">
+      <div>
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-xs font-mono tracking-widest uppercase text-blue-400 bg-blue-950/40 px-3 py-1 rounded-full border border-blue-500/30">CHRONICLES</span>
+          <h3 class="font-display text-2xl sm:text-4xl font-black mt-3 mb-3">MY DEVELOPMENT JOURNEY</h3>
+          <p class="text-brand-muted text-sm">Key milestones and progression as an independent game developer.</p>
+        </div>
+
+        <div class="relative max-w-4xl mx-auto pl-6 sm:pl-0">
+          <!-- Central Timeline Line -->
+          <div class="absolute left-6 sm:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-cyan-400 via-purple-500 to-blue-500 transform -translate-x-1/2"></div>
+          
+          <div id="timelineContainer" class="space-y-12">
+            <!-- Timeline milestones rendered by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills" class="relative py-28 px-4 sm:px-8 bg-[#070919] border-t border-blue-900/20">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-mono tracking-widest uppercase text-cyan-400 bg-cyan-950/40 px-3 py-1 rounded-full border border-cyan-500/30">TECH ARSENAL</span>
+        <h2 class="font-display text-3xl sm:text-5xl font-black mt-3 mb-4">TOOLS THAT POWER MY IDEAS</h2>
+        <p class="text-brand-muted text-base">Core technologies and specializations utilized across development workflows.</p>
+        <div class="w-20 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full mt-4"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Category 1: Game Development -->
+        <div class="glass-panel p-8 rounded-2xl border border-cyan-500/30 relative group hover:border-cyan-400 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-white mb-2">Game Development</h3>
+          <p class="text-xs text-brand-muted mb-6">Engine frameworks, scripting architectures, and physics environments.</p>
+          
+          <ul class="space-y-3 font-mono text-xs">
+            <li class="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 text-cyan-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Roblox Studio
+            </li>
+            <li class="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 text-cyan-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Luau Scripting
+            </li>
+            <li class="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 text-cyan-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Godot Engine
+            </li>
+            <li class="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 text-cyan-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> GDScript
+            </li>
+            <li class="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 text-cyan-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Unity Fundamentals
+            </li>
+          </ul>
+        </div>
+
+        <!-- Category 2: Programming -->
+        <div class="glass-panel p-8 rounded-2xl border border-purple-500/30 relative group hover:border-purple-400 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-purple-950 border border-purple-500/40 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-white mb-2">Programming</h3>
+          <p class="text-xs text-brand-muted mb-6">Languages and algorithms powering game logic and web applications.</p>
+          
+          <div class="grid grid-cols-2 gap-2 font-mono text-xs">
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5 text-purple-200 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> Python
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5 text-purple-200 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> JavaScript
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5 text-purple-200 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> C++
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5 text-purple-200 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> Java
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5 text-purple-200 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> HTML5 / CSS3
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5 text-purple-200 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> MySQL
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 3: Creative & Technical -->
+        <div class="glass-panel p-8 rounded-2xl border border-blue-500/30 relative group hover:border-blue-400 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-blue-950 border border-blue-500/40 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-white mb-2">Creative & Technical</h3>
+          <p class="text-xs text-brand-muted mb-6">Interaction design, environment craft, vision experiments, and polish.</p>
+          
+          <ul class="space-y-3 font-mono text-xs">
+            <li class="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 text-blue-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> UI/UX Design & HUD Interfaces
+            </li>
+            <li class="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 text-blue-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Game Mechanics & Quest Systems
+            </li>
+            <li class="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 text-blue-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> 3D Environments & Level Design
+            </li>
+            <li class="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 text-blue-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Animation Workflows & Debugging
+            </li>
+            <li class="flex items-center gap-3 p-2.5 rounded-lg bg-black/40 border border-white/5 text-blue-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> OpenCV & MediaPipe Experiments
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact" class="relative py-28 px-4 sm:px-8 border-t border-purple-900/20">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="max-w-4xl mx-auto glass-panel p-8 sm:p-12 rounded-3xl border border-cyan-500/30 shadow-2xl relative overflow-hidden">
+        
+        <!-- Background light streak -->
+        <div class="absolute -top-32 -right-32 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -left-32 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-mono tracking-widest uppercase text-cyan-400 bg-cyan-950/40 px-3 py-1 rounded-full border border-cyan-500/30">TRANSMISSION LINK</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-black mt-3 mb-3">LET'S BUILD SOMETHING AWESOME</h2>
+          <p class="text-brand-muted text-sm sm:text-base">Have a game idea, collaboration opportunity, or project in mind? Let's connect.</p>
+        </div>
+
+        <form id="contactForm" class="space-y-6" novalidate>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label for="contactName" class="block font-mono text-xs uppercase tracking-wider text-cyan-300 mb-2">Your Name *</label>
+              <input type="text" id="contactName" name="name" required placeholder="Alex Mercer"
+                     class="w-full bg-[#050611]/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-brand-muted/40 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 font-sans transition-colors">
+              <p id="nameError" class="text-xs text-rose-400 mt-1 hidden"></p>
+            </div>
+
+            <div>
+              <label for="contactEmail" class="block font-mono text-xs uppercase tracking-wider text-cyan-300 mb-2">Your Email *</label>
+              <input type="email" id="contactEmail" name="email" required placeholder="alex@domain.com"
+                     class="w-full bg-[#050611]/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-brand-muted/40 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 font-sans transition-colors">
+              <p id="emailError" class="text-xs text-rose-400 mt-1 hidden"></p>
+            </div>
+          </div>
+
+          <div>
+            <label for="contactSubject" class="block font-mono text-xs uppercase tracking-wider text-cyan-300 mb-2">Subject *</label>
+            <input type="text" id="contactSubject" name="subject" required placeholder="Roblox Project Collaboration / Inquiry"
+                   class="w-full bg-[#050611]/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-brand-muted/40 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 font-sans transition-colors">
+            <p id="subjectError" class="text-xs text-rose-400 mt-1 hidden"></p>
+          </div>
+
+          <div>
+            <label for="contactMessage" class="block font-mono text-xs uppercase tracking-wider text-cyan-300 mb-2">Message *</label>
+            <textarea id="contactMessage" name="message" rows="5" required placeholder="Tell me about your gameplay ideas, scope, or questions..."
+                      class="w-full bg-[#050611]/80 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-brand-muted/40 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 font-sans transition-colors resize-none"></textarea>
+            <p id="messageError" class="text-xs text-rose-400 mt-1 hidden"></p>
+          </div>
+
+          <!-- Form feedback status notice -->
+          <div id="contactStatusNotice" class="hidden p-4 rounded-xl font-mono text-xs"></div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+            <button type="submit" id="submitFormBtn"
+                    class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-display text-xs tracking-wider font-bold bg-gradient-to-r from-cyan-400 to-blue-600 text-black hover:shadow-neon-cyan transition-all flex items-center justify-center gap-2">
+              <span id="btnSpinner" class="hidden w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></span>
+              <span id="btnText">SEND TRANSMISSION</span>
+            </button>
+
+            <!-- Social Quick Links -->
+            <div class="flex items-center gap-4 text-xs font-mono text-brand-muted">
+              <span>OR DIRECT VIA:</span>
+              <a href="https://www.instagram.com/leon_gx_/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline">Instagram</a>
+              <span class="text-white/20">|</span>
+              <a id="emailDirectLink" href="mailto:leonmagicstudio@gmail.com" class="text-purple-400 hover:underline">Email Client</a>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="border-t border-white/10 bg-[#050611] py-12 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-cyan-400 p-[1.5px]">
+          <div class="w-full h-full bg-[#050611] rounded-[6.5px] flex items-center justify-center">
+            <span class="font-display font-black text-cyan-400 text-sm">LM</span>
+          </div>
+        </div>
+        <div>
+          <span class="font-display font-bold text-white text-sm">Leon Magic Studio</span>
+          <p class="text-[11px] text-brand-muted font-mono">Created by Muthu Kumar · Solo Indie Game Developer</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs text-brand-muted font-mono">
+        <a href="#hero" class="hover:text-cyan-400 transition-colors">Top</a>
+        <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+        <a href="#games" class="hover:text-cyan-400 transition-colors">Games</a>
+        <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+        <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <button id="backToTopBtn" class="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400 hover:text-cyan-400 text-brand-muted transition-all" aria-label="Back to Top">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto text-center mt-8 pt-6 border-t border-white/5 text-[11px] text-brand-muted font-mono">
+      © <span id="currentYear"></span> Leon Magic Studio. Built with creativity and passion.
+    </div>
+  </footer>
+
+  <div id="gameModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="modalGameTitle">
+    <div id="gameModalCard" class="relative w-full max-w-3xl bg-[#0B1024] border border-cyan-500/40 rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh] transition-all transform scale-95 opacity-0 duration-300">
+      
+      <!-- Modal Close Button -->
+      <button id="closeModalBtn" class="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/60 text-white/70 hover:text-white hover:bg-black border border-white/10 transition-colors" aria-label="Close modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="overflow-y-auto p-6 sm:p-8 space-y-6">
+        
+        <!-- Large Cover Art / Graphic -->
+        <div id="modalCoverWrapper" class="w-full h-64 sm:h-80 rounded-2xl overflow-hidden relative border border-white/10 bg-black">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Title, Badges & Genre -->
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div id="modalBadges" class="flex flex-wrap gap-2 mb-2"></div>
+            <h3 id="modalGameTitle" class="font-display text-2xl sm:text-3xl font-bold text-white"></h3>
+          </div>
+          <div id="modalActionLinks" class="flex items-center gap-3"></div>
+        </div>
+
+        <!-- Description -->
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-cyan-400 mb-2">OVERVIEW</h4>
+          <p id="modalGameDescription" class="text-brand-muted text-sm sm:text-base leading-relaxed"></p>
+        </div>
+
+        <!-- Metadata Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-black/40 border border-white/5 font-mono text-xs">
+          <div>
+            <span class="text-brand-muted block">GENRE</span>
+            <span id="modalGameGenre" class="text-white font-semibold"></span>
+          </div>
+          <div>
+            <span class="text-brand-muted block">PLATFORM</span>
+            <span id="modalGamePlatform" class="text-white font-semibold"></span>
+          </div>
+          <div>
+            <span class="text-brand-muted block">DEV STAGE</span>
+            <span id="modalGameStage" class="text-white font-semibold"></span>
+          </div>
+          <div>
+            <span class="text-brand-muted block">CREATOR</span>
+            <span class="text-white font-semibold">Muthu Kumar</span>
+          </div>
+        </div>
+
+        <!-- Screenshots / Concept Section -->
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-purple-400 mb-3">GALLERY & VISUAL PREVIEWS</h4>
+          <div id="modalScreenshotGallery" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+     * 1. CONFIGURATION & STATE
+     * ========================================================================= */
+    const STUDIO_CONFIG = {
+      developerName: "Muthu Kumar",
+      studioName: "Leon Magic Studio",
+      instagramUrl: "https://www.instagram.com/leon_gx_/",
+      youtubeUrl: "", // Configurable: Leave blank or set your actual URL
+      contactEmail: "leonmagicstudio@gmail.com",
+      stats: {
+        projects: "12+",
+        developer: "1",
+        ideas: "∞"
+      }
+    };
+
+    // Global application state
+    const APP_STATE = {
+      reducedEffects: localStorage.getItem('lms_reduced_effects') === 'true',
+      isWebGLAvailable: true,
+      threeSceneInitialized: false
+    };
+
+    /* =========================================================================
+     * 2. SOUND EFFECTS (Web Audio API Synthesizer - Zero External Assets)
+     * ========================================================================= */
+    class AudioSynthesizer {
+      constructor() {
+        this.ctx = null;
+      }
+      init() {
+        if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContextClass();
+        }
+      }
+      playBlip(freq = 600, duration = 0.08) {
+        if (APP_STATE.reducedEffects) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          if (this.ctx.state === 'suspended') this.ctx.resume();
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(freq * 1.5, this.ctx.currentTime + duration);
+          gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + duration);
+        } catch (e) {
+          // Audio error fail silently
+        }
+      }
+    }
+    const audioSynth = new AudioSynthesizer();
+
+    /* =========================================================================
+     * 3. DATA REPOSITORY: 12 GAMES OF LEON MAGIC STUDIO
+     * ========================================================================= */
+    const GAMES_DATA = [
+      {
+        id: "muthu-2d-game",
+        title: "Muthu 2D Game",
+        category: "released",
+        statusText: "RELEASED",
+        genre: "2D Adventure / Mobile",
+        platform: "Web / Mobile",
+        description: "A 2D game project showcasing my creativity and game development journey.",
+        details: "An experimental 2D platforming and adventure game optimized for touch and mobile controls, demonstrating core physics, obstacle navigation, and responsive game loop scripting.",
+        thumbnail: "",
+        playUrl: "https://muthugaming.github.io/Muthu-game-moblie/",
+        buttonText: "PLAY NOW",
+        hasRealLink: true,
+        screenshots: [],
+        themeColor: "#10B981"
+      },
+      {
+        id: "checkpoint-impossible-3d",
+        title: "Checkpoint Impossible 3D",
+        category: "released",
+        statusText: "RELEASED",
+        genre: "3D Challenge / Obby",
+        platform: "Roblox / PC",
+        description: "A challenging 3D obstacle game where players navigate difficult stages and overcome obstacles.",
+        details: "Precision platforming obby featuring tight checkpoint progression, escalating hazard mechanics, and dynamic camera angles.",
+        thumbnail: "image/Checkpoint Impossible.png",
+        playUrl: "",
+        buttonText: "PLAY NOW",
+        hasRealLink: false,
+        screenshots: [],
+        themeColor: "#10B981"
+      },
+      {
+        id: "ghilli-the-game",
+        title: "Ghilli: The Game",
+        category: "final-stage",
+        statusText: "IN FINAL STAGE",
+        genre: "Action / Driving / Open World",
+        platform: "PC",
+        description: "An action-packed game project approaching its final development stage.",
+        details: "Features vehicle handling, mission sequences, combat mechanics, and local environmental storytelling inspired by cinematic action.",
+        thumbnail: "image/Ghilli the game .jpeg",
+        playUrl: "",
+        buttonText: "VIEW PROGRESS",
+        hasRealLink: false,
+        screenshots: [],
+        themeColor: "#F59E0B"
+      },
+      {
+        id: "scary-horror-game",
+        title: "Scary Horror Game",
+        category: "released",
+        statusText: "PC: AVAILABLE · MOBILE: COMING SOON",
+        genre: "Horror / Mystery",
+        platform: "PC (Available) / Mobile (Soon)",
+        description: "Enter a terrifying world filled with suspense, mysterious locations, and horror encounters.",
+        details: "First-person atmospheric survival horror focusing on environmental sound design, dynamic shadows, flashlight energy management, and puzzle mechanics.",
+        thumbnail: "image/Scary horror game.png",
+        playUrl: "",
+        buttonText: "PLAY ON PC (Coming Soon on Mobile) ",
+        hasRealLink: false,
+        screenshots: [],
+        themeColor: "#EF4444"
+      },
+      {
+        id: "dogesh-street",
+        title: "Dogesh Street",
+        category: "coming-soon",
+        statusText: "COMING SOON",
+        genre: "Adventure / Open World",
+        platform: "PC / Mobile",
+        description: "An upcoming game project currently awaiting its public release.",
+        details: "Quirky urban adventure game featuring open streets, NPC interactions, humor, and exploration quests.",
+        thumbnail: "image/dogesh .jpeg",
+        playUrl: "",
+        buttonText: "COMING SOON",
+        hasRealLink: false,
+        screenshots: [],
+        themeColor: "#06B6D4"
+      },
+      {
+        id: "checkpoint-rush",
+        title: "Checkpoint Impossible Rush",
+        category: "coming-soon",
+        statusText: "COMING SOON",
+        genre: "Fast-Paced Obby / Challenge",
+        platform: "Roblox / PC",
+        description: "A fast-paced obstacle challenge focused on difficult jumps and progression.",
+        details: "Speedrun-focused spin-off featuring timed parkour sections, moving platforms, and tight landing pads.",
+        thumbnail: "image/checkpoint impossiable rush.png",
+        playUrl: "",
+        buttonText: "COMING SOON",
+        hasRealLink: false,
+        screenshots: [],
+        themeColor: "#3B82F6",
+      },
+      {
+        id: "kisthenics-the-game",
+        title: "Kisthenics: The Game",
+        category: "released",
+        statusText: "RELEASED",
+        genre: "Fitness / Challenge",
+        platform: "PC / Android",
+        description: "A released game project from Leon Magic Studio.",
+        details: "Calisthenics and fitness-inspired gaming experience designed around stamina, movement rhythm, and bodyweight training progression.",
+        thumbnail: "image/Kisthench Game poser.png",
+        playUrl: "https://drive.google.com/file/d/1Rq1g-wfgynjhcVoEDBI3TolLD3OjcOAt/view?usp=drive_link",
+        buttonText: "DOWNLOAD & PLAY",
+        hasRealLink: true,
+        screenshots: [],
+        themeColor: "#10B981",
+      },
+      {
+        id: "goofygen-hat",
+        title: "Goofygen Hat",
+        category: "released",
+        statusText: "RELEASED",
+        genre: "Arcade / Casual",
+        platform: "Web / PC",
+        description: "A released gaming experience with its own unique identity.",
+        details: "Casual arcade-style challenge featuring comedic hat-balancing physics, reflex timing, and collectible cosmetic rewards.",
+        thumbnail: "image/Goofygen Game.png",
+        playUrl: "https://muthukumar127.github.io/Goofygen-Hat-Game-/",
+        buttonText: "PLAY NOW",
+        hasRealLink: true,
+        screenshots: [],
+        themeColor: "#10B981",
+      },
+      {
+        id: "thalapathy-the-game",
+        title: "Thalapathy: The Game",
+        category: "released",
+        statusText: "RELEASED",
+        genre: "Action / Brawler",
+        platform: "Web / PC",
+        description: "A released game project inspired by its own distinctive theme.",
+        details: "Fast-paced cinematic brawler game inspired by iconic Tamil cinema moments, dynamic hit reactions, and custom action combos.",
+        thumbnail: "image/thalapathy.png",
+        playUrl: "https://muthukumar127.github.io/Thalapathy-The-Game-by-Leon_gx-/",
+        buttonText: "PLAY NOW",
+        hasRealLink: true,
+        screenshots: [],
+        themeColor: "#10B981",
+      },
+      {
+        id: "spider-man-venom",
+        title: "Spider-Man vs Venom: Slap Battle",
+        category: "released",
+        statusText: "RELEASED",
+        genre: "Slap Battle / Action",
+        platform: "PC & Mobile",
+        description: "An action-oriented slap battle game featuring competitive gameplay.",
+        details: "Competitive multiplayer slap battle experience featuring superhero combat mechanics, knockdown physics, and arena ring-outs.",
+        thumbnail: "image/spider man.jpg",
+        playUrl: "https://drive.google.com/drive/folders/1fJUYdjnbelsa6WeN5Wue6oT2BhOlgxwS?usp=drive_link",
+        buttonText: "DOWNLOAD (PC & MOBILE)",
+        hasRealLink: true,
+        screenshots: [],
+        themeColor: "#EC4899",
+      },
+      {
+        id: "tamil-game-festival",
+        title: "Tamil Game Festival",
+        category: "released",
+        statusText: "RELEASED ON ROBLOX",
+        genre: "Festival / Cultural Experience",
+        platform: "Roblox",
+        description: "A Roblox gaming experience celebrating Tamil gaming culture and festival-inspired environments.",
+        details: "An authentic cultural showcase inside Roblox featuring traditional decorations, mini-games, interactive stalls, and community gathering spaces.",
+        thumbnail: "image/Tamil Game Festival.png",
+        playUrl: "https://www.roblox.com/share?code=e971403d51604c49b4f097385206593c&type=ExperienceDetails&stamp=1791517034677",
+        buttonText: "PLAY ON ROBLOX",
+        hasRealLink: true,
+        screenshots: [],
+        themeColor: "#F59E0B",
+      },
+      {
+        id: "tn-gta",
+        title: "TN GTA",
+        category: "in-development",
+        statusText: "IN DEVELOPMENT",
+        genre: "Open World / Driving",
+        platform: "PC",
+        description: "An ambitious open-world project inspired by Tamil Nadu, featuring roads, vehicles, buildings, and exploration.",
+        details: "Massive sandbox project featuring recognizable Tamil Nadu street layouts, bus routes, auto-rickshaws, realistic traffic AI, and localized urban environments.",
+        thumbnail: "",
+        playUrl: "",
+        buttonText: "FOLLOW DEVELOPMENT",
+        hasRealLink: false,
+        screenshots: [],
+        themeColor: "#3B82F6",
+      }
+    ];
+
+    const TIMELINE_MILESTONES = [
+      {
+        title: "Exploring 2D Game Development",
+        desc: "Started building mechanics, tile-based worlds, sprite systems, and classic physics logic.",
+        tag: "Foundations"
+      },
+      {
+        title: "Creating 3D Challenge Games",
+        desc: "Designed 'Checkpoint Impossible 3D', focusing on tight obstacle navigation and progression.",
+        tag: "3D Leap"
+      },
+      {
+        title: "Publishing Released Games",
+        desc: "Launched competitive titles like 'Spider-Man vs Venom: Slap Battle' and 'Tamil Game Festival' on Roblox.",
+        tag: "Multiplayer Launch"
+      },
+      {
+        title: "Developing Ghilli: The Game",
+        desc: "Advanced into cinematic vehicle chases, stunt sequences, and action mechanics, nearing the final stage.",
+        tag: "Action Scale"
+      },
+      {
+        title: "Expanding Horror Game Experiences",
+        desc: "Implemented suspense systems, ambient audio spatialization, and released on PC with mobile planned.",
+        tag: "Atmospheric"
+      },
+      {
+        title: "Working on TN GTA & Future Worlds",
+        desc: "Currently architecting an ambitious open-world experience inspired by Tamil Nadu roads and culture.",
+        tag: "Open World"
+      }
+    ];
+
+    // Generates a lightweight, themed SVG artwork banner for each game when external screenshots are missing
+    function generateGamePosterSVG(game) {
+      const initials = game.title.split(' ').map(w => w[0]).slice(0, 3).join('');
+      return `
+        <svg viewBox="0 0 600 360" class="w-full h-full object-cover select-none">
+          <defs>
+            <linearGradient id="bgGrad_${game.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#050611" />
+              <stop offset="50%" stop-color="#0B1024" />
+              <stop offset="100%" stop-color="${game.themeColor}" stop-opacity="0.25" />
+            </linearGradient>
+            <pattern id="grid_${game.id}" width="30" height="30" patternUnits="userSpaceOnUse">
+              <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <rect width="600" height="360" fill="url(#bgGrad_${game.id})" />
+          <rect width="600" height="360" fill="url(#grid_${game.id})" />
+          <circle cx="500" cy="80" r="140" fill="${game.themeColor}" opacity="0.12" filter="blur(30px)"/>
+          <circle cx="100" cy="280" r="100" fill="#22D3EE" opacity="0.08" filter="blur(20px)"/>
+          
+          <!-- Stylized Isometric Platform Illustration -->
+          <g transform="translate(180, 70)">
+            <polygon points="120,40 220,95 120,150 20,95" fill="#141B3B" stroke="${game.themeColor}" stroke-width="2"/>
+            <polygon points="20,95 120,150 120,200 20,145" fill="#0E132A" stroke="${game.themeColor}" stroke-width="1"/>
+            <polygon points="120,150 220,95 220,145 120,200" fill="#1A244D" stroke="${game.themeColor}" stroke-width="1"/>
+            <!-- Floating Beacon -->
+            <polygon points="120,0 140,50 100,50" fill="${game.themeColor}" opacity="0.9"/>
+          </g>
+
+          <text x="35" y="60" font-family="Orbitron" font-weight="900" font-size="34" fill="${game.themeColor}" letter-spacing="3">${initials}</text>
+          <text x="35" y="90" font-family="monospace" font-size="12" fill="#A7AEC5" letter-spacing="1">LEON MAGIC STUDIO // PROJECT ARCHIVE</text>
+          
+          <rect x="35" y="280" width="130" height="26" rx="4" fill="rgba(0,0,0,0.6)" stroke="${game.themeColor}" stroke-width="1"/>
+          <text x="45" y="297" font-family="monospace" font-size="11" fill="#FFFFFF">${game.genre.substring(0, 18)}</text>
+        </svg>
+      `;
+    }
+
+    function renderGameArtwork(container, game) {
+      if (!game.thumbnail) {
+        container.innerHTML = generateGamePosterSVG(game);
+        return;
+      }
+
+      const image = document.createElement('img');
+      image.src = game.thumbnail;
+      image.alt = `${game.title} artwork`;
+      image.className = "w-full h-full object-cover select-none";
+      image.onerror = () => {
+        image.onerror = null;
+        container.innerHTML = generateGamePosterSVG(game);
+      };
+      container.replaceChildren(image);
+    }
+
+    function renderGames(filter = "all") {
+      const grid = document.getElementById('gamesGrid');
+      grid.innerHTML = '';
+
+      const filtered = GAMES_DATA.filter(game => {
+        if (filter === "all") return true;
+        return game.category === filter;
+      });
+
+      filtered.forEach((game, index) => {
+        const card = document.createElement('article');
+        card.className = "game-card glass-panel rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-400/60 transition-all duration-300 flex flex-col group relative";
+        
+        let primaryBtn = '';
+        if (game.hasRealLink && game.playUrl) {
+          primaryBtn = `
+            <a href="${game.playUrl}" target="_blank" rel="noopener noreferrer" 
+               class="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-600 text-black font-display text-[11px] font-bold tracking-wider text-center hover:opacity-90 transition-opacity">
+              ${game.buttonText}
+            </a>`;
+        } else if (game.buttonText === "VIEW PROGRESS") {
+          primaryBtn = `
+            <button onclick="openGameModal('${game.id}')" 
+               class="flex-1 py-2.5 px-3 rounded-xl bg-amber-500/20 border border-amber-500/50 text-amber-300 font-display text-[11px] font-bold tracking-wider text-center hover:bg-amber-500/30 transition-all">
+              ${game.buttonText}
+            </button>`;
+        } else if (game.buttonText === "FOLLOW DEVELOPMENT") {
+          primaryBtn = `
+            <button onclick="openGameModal('${game.id}')" 
+               class="flex-1 py-2.5 px-3 rounded-xl bg-blue-500/20 border border-blue-500/50 text-blue-300 font-display text-[11px] font-bold tracking-wider text-center hover:bg-blue-500/30 transition-all">
+              ${game.buttonText}
+            </button>`;
+        } else {
+          primaryBtn = `
+            <span class="flex-1 py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 text-brand-muted font-mono text-[11px] text-center">
+              ${game.buttonText}
+            </span>`;
+        }
+
+        const badgeColor = game.category === "released"
+          ? "border-emerald-500/40 text-emerald-300 bg-emerald-950/40"
+          : game.category === "final-stage"
+            ? "border-amber-500/40 text-amber-300 bg-amber-950/40"
+            : game.category === "in-development"
+              ? "border-blue-500/40 text-blue-300 bg-blue-950/40"
+              : "border-cyan-500/40 text-cyan-300 bg-cyan-950/40";
+
+        card.innerHTML = `
+          <!-- Thumbnail Area -->
+          <div class="relative w-full aspect-[16/10] overflow-hidden bg-black/50 border-b border-white/10">
+            <div data-game-art="${game.id}" class="w-full h-full transform group-hover:scale-105 transition-transform duration-500">
+              ${generateGamePosterSVG(game)}
+            </div>
+            <!-- Status Badge -->
+            <div class="absolute top-3 right-3 max-w-[68%] text-right whitespace-normal leading-tight font-mono text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-md border ${badgeColor} backdrop-blur-md font-semibold">
+              ${game.statusText}
+            </div>
+            <!-- Platform Label -->
+            <div class="absolute bottom-3 left-3 font-mono text-[10px] tracking-wider text-cyan-300 bg-black/70 px-2 py-0.5 rounded border border-white/10">
+              ${game.platform}
+            </div>
+          </div>
+
+          <!-- Card Body -->
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="text-[11px] font-mono text-brand-muted uppercase mb-1 tracking-wider">${game.genre}</div>
+              <h3 class="font-display text-lg font-bold text-white group-hover:text-cyan-300 transition-colors mb-2">${game.title}</h3>
+              <p class="text-brand-muted text-xs leading-relaxed mb-4">${game.description}</p>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="pt-4 border-t border-white/5 flex items-center gap-2 mt-auto">
+              ${primaryBtn}
+              <button onclick="openGameModal('${game.id}')" class="px-3 py-2.5 rounded-xl border border-white/20 text-white hover:border-cyan-400 hover:text-cyan-400 font-mono text-[11px] transition-colors" title="View Game Details">
+                DETAILS
+              </button>
+            </div>
+          </div>
+        `;
+        renderGameArtwork(card.querySelector('[data-game-art]'), game);
+        grid.appendChild(card);
+      });
+    }
+
+    function renderTimeline() {
+      const container = document.getElementById('timelineContainer');
+      container.innerHTML = '';
+
+      TIMELINE_MILESTONES.forEach((m, idx) => {
+        const isEven = idx % 2 === 0;
+        const node = document.createElement('div');
+        node.className = `relative flex items-center justify-between sm:justify-normal ${isEven ? 'sm:flex-row-reverse' : ''} group`;
+
+        node.innerHTML = `
+          <!-- Milestone dot -->
+          <div class="absolute left-6 sm:left-1/2 w-4 h-4 rounded-full bg-cyan-400 border-4 border-[#050611] transform -translate-x-1/2 z-10 shadow-neon-cyan group-hover:scale-125 transition-transform"></div>
+
+          <!-- Content Card -->
+          <div class="ml-12 sm:ml-0 sm:w-1/2 ${isEven ? 'sm:pl-10 text-left' : 'sm:pr-10 sm:text-right'} w-full">
+            <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-cyan-400/40 transition-all">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-cyan-400 px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-500/30">${m.tag}</span>
+              <h4 class="font-display text-base font-bold text-white mt-2 mb-1">${m.title}</h4>
+              <p class="text-xs text-brand-muted leading-relaxed">${m.desc}</p>
+            </div>
+          </div>
+        `;
+        container.appendChild(node);
+      });
+    }
+
+    function openGameModal(gameId) {
+      const game = GAMES_DATA.find(g => g.id === gameId);
+      if (!game) return;
+
+      audioSynth.playBlip(750, 0.1);
+
+      const modalCover = document.getElementById('modalCoverWrapper');
+      modalCover.innerHTML = generateGamePosterSVG(game);
+      renderGameArtwork(modalCover, game);
+      document.getElementById('modalGameTitle').textContent = game.title;
+      document.getElementById('modalGameDescription').textContent = game.details;
+      document.getElementById('modalGameGenre').textContent = game.genre;
+      document.getElementById('modalGamePlatform').textContent = game.platform;
+      document.getElementById('modalGameStage').textContent = game.statusText;
+
+      // Badges
+      const badgesContainer = document.getElementById('modalBadges');
+      badgesContainer.innerHTML = `
+        <span class="font-mono text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-md border ${badgeColor}">${game.statusText}</span>
+        <span class="font-mono text-[10px] tracking-wider text-cyan-300 bg-cyan-950/50 px-2.5 py-1 rounded-md border border-cyan-500/30">${game.platform}</span>
+      `;
+
+      // Actions in Modal
+      const actionContainer = document.getElementById('modalActionLinks');
+      actionContainer.innerHTML = '';
+      if (game.hasRealLink && game.playUrl) {
+        actionContainer.innerHTML += `
+          <a href="${game.playUrl}" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-500 text-black font-display text-xs font-bold shadow-neon-cyan">
+            ${game.buttonText}
+          </a>
+        `;
+      }
+
+      // Screenshot gallery
+      const gallery = document.getElementById('modalScreenshotGallery');
+      gallery.innerHTML = '';
+      game.screenshots.forEach((screenshot) => {
+        const image = document.createElement('img');
+        image.src = screenshot;
+        image.alt = `${game.title} screenshot`;
+        image.className = "w-full aspect-video rounded-xl object-cover border border-white/10";
+        gallery.appendChild(image);
+      });
+
+      const modal = document.getElementById('gameModal');
+      const modalCard = document.getElementById('gameModalCard');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => {
+        modalCard.classList.remove('scale-95', 'opacity-0');
+        modalCard.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+
+    function closeGameModal() {
+      const modal = document.getElementById('gameModal');
+      const modalCard = document.getElementById('gameModalCard');
+      modalCard.classList.remove('scale-100', 'opacity-100');
+      modalCard.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 250);
+    }
+
+    function setupContactForm() {
+      const form = document.getElementById('contactForm');
+      const nameInput = document.getElementById('contactName');
+      const emailInput = document.getElementById('contactEmail');
+      const subjectInput = document.getElementById('contactSubject');
+      const messageInput = document.getElementById('contactMessage');
+      const statusNotice = document.getElementById('contactStatusNotice');
+      const submitBtn = document.getElementById('submitFormBtn');
+      const spinner = document.getElementById('btnSpinner');
+      const btnText = document.getElementById('btnText');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        let isValid = true;
+
+        // Reset errors
+        ['name', 'email', 'subject', 'message'].forEach(field => {
+          document.getElementById(`${field}Error`).classList.add('hidden');
+        });
+        statusNotice.className = "hidden p-4 rounded-xl font-mono text-xs";
+
+        if (!nameInput.value.trim()) {
+          showError('nameError', 'Please enter your name.');
+          isValid = false;
+        }
+
+        const emailVal = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailVal || !emailRegex.test(emailVal)) {
+          showError('emailError', 'Please enter a valid email address.');
+          isValid = false;
+        }
+
+        if (!subjectInput.value.trim()) {
+          showError('subjectError', 'Please provide a subject line.');
+          isValid = false;
+        }
+
+        if (!messageInput.value.trim() || messageInput.value.trim().length < 10) {
+          showError('messageError', 'Message must be at least 10 characters long.');
+          isValid = false;
+        }
+
+        if (!isValid) return;
+
+        // Prevent duplicates
+        submitBtn.disabled = true;
+        spinner.classList.remove('hidden');
+        btnText.textContent = "TRANSMITTING...";
+
+        setTimeout(() => {
+          spinner.classList.add('hidden');
+          btnText.textContent = "SEND TRANSMISSION";
+          submitBtn.disabled = false;
+
+          // Honest explanation regarding client-side portfolio transmission
+          statusNotice.className = "p-4 rounded-xl font-mono text-xs bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 block";
+          statusNotice.innerHTML = `
+            <div class="font-bold mb-1">TRANSMISSION ENCRYPTED & PREPARED!</div>
+            <div>Thank you ${escapeHtml(nameInput.value.trim())}. As this portfolio operates client-side without an active backend server, you can also mail directly at: 
+            <a href="mailto:${STUDIO_CONFIG.contactEmail}?subject=${encodeURIComponent(subjectInput.value)}&body=${encodeURIComponent(messageInput.value)}" class="underline text-white font-bold">${STUDIO_CONFIG.contactEmail}</a></div>
+          `;
+
+          form.reset();
+        }, 1200);
+      });
+
+      function showError(id, message) {
+        const el = document.getElementById(id);
+        el.textContent = message;
+        el.classList.remove('hidden');
+      }
+
+      function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+    }
+
+    class HeroThreeScene {
+      constructor() {
+        this.container = document.getElementById('canvas-container');
+        this.fallback = document.getElementById('webgl-fallback');
+        this.scene = null;
+        this.camera = null;
+        this.renderer = null;
+        this.animationFrameId = null;
+        this.isTabActive = true;
+        this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+        this.clock = new THREE.Clock();
+
+        // 3D Objects
+        this.islandsGroup = new THREE.Group();
+        this.crystals = [];
+        this.drone = null;
+        this.starParticles = null;
+        this.monolith = null;
+      }
+
+      init() {
+        if (APP_STATE.reducedEffects) {
+          this.fallback.classList.remove('hidden');
+          return;
+        }
+
+        try {
+          // Check WebGL availability
+          const canvas = document.createElement('canvas');
+          const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+          if (!gl) throw new Error("WebGL unsupported");
+
+          // Scene Setup
+          this.scene = new THREE.Scene();
+          this.scene.fog = new THREE.FogExp2(0x050611, 0.035);
+
+          // Camera Setup
+          const width = this.container.clientWidth;
+          const height = this.container.clientHeight;
+          this.camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 100);
+          this.camera.position.set(0, 3, 13);
+
+          // Renderer Setup
+          this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+          this.renderer.setSize(width, height);
+          this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+          this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          this.renderer.toneMappingExposure = 1.1;
+          this.container.appendChild(this.renderer.domElement);
+
+          // Lighting Setup
+          this.setupLighting();
+
+          // Build Procedural Floating Islands World
+          this.buildWorld();
+
+          // Event Listeners
+          this.setupEvents();
+
+          APP_STATE.threeSceneInitialized = true;
+          this.animate();
+        } catch (err) {
+          console.warn("Three.js initialization fallen back to 2D gradient:", err);
+          APP_STATE.isWebGLAvailable = false;
+          if (this.fallback) this.fallback.classList.remove('hidden');
+        }
+      }
+
+      setupLighting() {
+        // Ambient soft celestial light
+        const ambient = new THREE.AmbientLight(0x1B234B, 1.2);
+        this.scene.add(ambient);
+
+        // Neon Blue Key Light
+        const blueLight = new THREE.DirectionalLight(0x3B82F6, 2.5);
+        blueLight.position.set(8, 12, 10);
+        this.scene.add(blueLight);
+
+        // Neon Purple Rim Light
+        const purpleLight = new THREE.DirectionalLight(0xA855F7, 3.0);
+        purpleLight.position.set(-10, -5, -6);
+        this.scene.add(purpleLight);
+
+        // Monolith Neon Cyan Point Light
+        const cyanPoint = new THREE.PointLight(0x22D3EE, 4.0, 18);
+        cyanPoint.position.set(0, 2.5, 0);
+        this.scene.add(cyanPoint);
+      }
+
+      buildWorld() {
+        const islandGeoMat = new THREE.MeshStandardMaterial({
+          color: 0x0D1432,
+          roughness: 0.85,
+          metalness: 0.15,
+          flatShading: true
+        });
+
+        const glowingGrassMat = new THREE.MeshStandardMaterial({
+          color: 0x1A2859,
+          roughness: 0.6,
+          metalness: 0.3,
+          flatShading: true
+        });
+
+        // 1. Central Floating Main Island
+        const centralIsland = new THREE.Group();
+        const baseCone = new THREE.Mesh(new THREE.ConeGeometry(4.2, 4.8, 7), islandGeoMat);
+        baseCone.rotation.x = Math.PI;
+        baseCone.position.y = -2.4;
+        centralIsland.add(baseCone);
+
+        const islandTop = new THREE.Mesh(new THREE.CylinderGeometry(4.2, 4.0, 0.7, 7), glowingGrassMat);
+        islandTop.position.y = 0.1;
+        centralIsland.add(islandTop);
+
+        // 2. Central Leon Magic Studio Monolith Monument
+        const monolithGeo = new THREE.BoxGeometry(0.9, 3.6, 0.9);
+        const monolithMat = new THREE.MeshStandardMaterial({
+          color: 0x050611,
+          metalness: 0.9,
+          roughness: 0.1
+        });
+        this.monolith = new THREE.Mesh(monolithGeo, monolithMat);
+        this.monolith.position.set(0, 2.2, 0);
+        centralIsland.add(this.monolith);
+
+        // Monolith Neon Glowing Trim
+        const trimGeo = new THREE.BoxGeometry(0.94, 0.2, 0.94);
+        const trimMat = new THREE.MeshBasicMaterial({ color: 0x22D3EE });
+        const trimTop = new THREE.Mesh(trimGeo, trimMat);
+        trimTop.position.set(0, 3.8, 0);
+        centralIsland.add(trimTop);
+
+        const trimMid = new THREE.Mesh(trimGeo, new THREE.MeshBasicMaterial({ color: 0xA855F7 }));
+        trimMid.position.set(0, 2.2, 0);
+        centralIsland.add(trimMid);
+
+        // 3. Silhouette Developer Character sitting on rock
+        const rockGeo = new THREE.DodecahedronGeometry(0.7);
+        const rockMat = new THREE.MeshStandardMaterial({ color: 0x151D3B, roughness: 0.9 });
+        const rock = new THREE.Mesh(rockGeo, rockMat);
+        rock.position.set(2.4, 0.6, 1.2);
+        centralIsland.add(rock);
+
+        // Developer Silhouette
+        const devGroup = new THREE.Group();
+        const torso = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.6, 0.25), new THREE.MeshBasicMaterial({ color: 0x030408 }));
+        torso.position.set(0, 0.45, 0);
+        devGroup.add(torso);
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.18, 12, 12), new THREE.MeshBasicMaterial({ color: 0x030408 }));
+        head.position.set(0, 0.9, 0);
+        devGroup.add(head);
+        // Cyber Visor glow on dev
+        const visor = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.06, 0.08), new THREE.MeshBasicMaterial({ color: 0x22D3EE }));
+        visor.position.set(0.1, 0.9, 0.1);
+        devGroup.add(visor);
+        devGroup.position.set(2.4, 0.9, 1.2);
+        devGroup.rotation.y = -Math.PI / 4;
+        centralIsland.add(devGroup);
+
+        // 4. Robotic Companion Drone
+        this.drone = new THREE.Group();
+        const droneBody = new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 16), new THREE.MeshStandardMaterial({ color: 0x22D3EE, metalness: 0.8, roughness: 0.2 }));
+        const droneEye = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), new THREE.MeshBasicMaterial({ color: 0xA855F7 }));
+        droneEye.position.set(0.14, 0, 0.1);
+        this.drone.add(droneBody);
+        this.drone.add(droneEye);
+        this.drone.position.set(3.2, 2.2, 1.2);
+        centralIsland.add(this.drone);
+
+        this.islandsGroup.add(centralIsland);
+
+        // 5. Surrounding Satellite Floating Islands
+        const satelliteData = [
+          { x: -7, y: 1.5, z: -3, scale: 0.65, rot: 0.3 },
+          { x: 7.5, y: -1.2, z: -4, scale: 0.75, rot: -0.4 },
+          { x: -5, y: -3.0, z: 2, scale: 0.55, rot: 0.8 },
+          { x: 5.5, y: 3.2, z: -2, scale: 0.5, rot: -0.2 }
+        ];
+
+        satelliteData.forEach(data => {
+          const island = new THREE.Group();
+          const cone = new THREE.Mesh(new THREE.ConeGeometry(3 * data.scale, 3.8 * data.scale, 6), islandGeoMat);
+          cone.rotation.x = Math.PI;
+          cone.position.y = -1.9 * data.scale;
+          island.add(cone);
+
+          const top = new THREE.Mesh(new THREE.CylinderGeometry(3 * data.scale, 2.8 * data.scale, 0.4, 6), glowingGrassMat);
+          island.add(top);
+
+          // Futuristic spire on satellites
+          const spire = new THREE.Mesh(new THREE.ConeGeometry(0.4 * data.scale, 3 * data.scale, 4), new THREE.MeshStandardMaterial({ color: 0x3B82F6, metalness: 0.8, roughness: 0.3 }));
+          spire.position.y = 1.5 * data.scale;
+          island.add(spire);
+
+          island.position.set(data.x, data.y, data.z);
+          this.islandsGroup.add(island);
+        });
+
+        // 6. Glowing Energy Bridges (connecting central island to satellites)
+        const bridgeMat = new THREE.MeshBasicMaterial({
+          color: 0x22D3EE,
+          transparent: true,
+          opacity: 0.45,
+          wireframe: true
+        });
+        const bridgeGeo = new THREE.CylinderGeometry(0.08, 0.08, 7.5, 6);
+        const bridge1 = new THREE.Mesh(bridgeGeo, bridgeMat);
+        bridge1.position.set(-3.5, 0.8, -1.5);
+        bridge1.rotation.z = Math.PI / 3;
+        bridge1.rotation.y = -Math.PI / 6;
+        this.islandsGroup.add(bridge1);
+
+        // 7. Floating Hover Crystals
+        const crystalGeo = new THREE.OctahedronGeometry(0.4, 0);
+        const crystalMat = new THREE.MeshStandardMaterial({
+          color: 0xA855F7,
+          emissive: 0x581C87,
+          metalness: 0.9,
+          roughness: 0.1
+        });
+
+        for (let i = 0; i < 9; i++) {
+          const crystal = new THREE.Mesh(crystalGeo, crystalMat);
+          const angle = (i / 9) * Math.PI * 2;
+          const radius = 5.5 + Math.sin(i) * 2;
+          crystal.position.set(
+            Math.cos(angle) * radius,
+            (Math.sin(i * 1.5) * 2) - 0.5,
+            Math.sin(angle) * radius
+          );
+          this.crystals.push(crystal);
+          this.islandsGroup.add(crystal);
+        }
+
+        this.scene.add(this.islandsGroup);
+
+        // 8. Cosmic Particle Sky
+        const starGeo = new THREE.BufferGeometry();
+        const starCount = 650;
+        const positions = new Float32Array(starCount * 3);
+        const colors = new Float32Array(starCount * 3);
+
+        const color1 = new THREE.Color(0x22D3EE);
+        const color2 = new THREE.Color(0xA855F7);
+        const color3 = new THREE.Color(0xFFFFFF);
+
+        for (let i = 0; i < starCount * 3; i += 3) {
+          positions[i] = (Math.random() - 0.5) * 60;
+          positions[i + 1] = (Math.random() - 0.5) * 45;
+          positions[i + 2] = (Math.random() - 0.5) * 40 - 10;
+
+          const chosenColor = Math.random() > 0.6 ? color1 : (Math.random() > 0.3 ? color2 : color3);
+          colors[i] = chosenColor.r;
+          colors[i + 1] = chosenColor.g;
+          colors[i + 2] = chosenColor.b;
+        }
+
+        starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        starGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const starMat = new THREE.PointsMaterial({
+          size: 0.12,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.8
+        });
+
+        this.starParticles = new THREE.Points(starGeo, starMat);
+        this.scene.add(this.starParticles);
+      }
+
+      setupEvents() {
+        // Window Resize
+        window.addEventListener('resize', () => {
+          if (!this.renderer || !this.camera) return;
+          const w = this.container.clientWidth;
+          const h = this.container.clientHeight;
+          this.camera.aspect = w / h;
+          this.camera.updateProjectionMatrix();
+          this.renderer.setSize(w, h);
+        });
+
+        // Mouse Parallax
+        window.addEventListener('mousemove', (e) => {
+          this.mouse.targetX = (e.clientX / window.innerWidth - 0.5) * 2;
+          this.mouse.targetY = (e.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        // Touch Parallax
+        window.addEventListener('touchmove', (e) => {
+          if (e.touches.length > 0) {
+            this.mouse.targetX = (e.touches[0].clientX / window.innerWidth - 0.5) * 2;
+            this.mouse.targetY = (e.touches[0].clientY / window.innerHeight - 0.5) * 2;
+          }
+        }, { passive: true });
+
+        // Visibility Change (Pause when tab is hidden)
+        document.addEventListener('visibilitychange', () => {
+          this.isTabActive = !document.hidden;
+          if (this.isTabActive) {
+            this.clock.start();
+          } else {
+            this.clock.stop();
+          }
+        });
+      }
+
+      animate() {
+        this.animationFrameId = requestAnimationFrame(() => this.animate());
+
+        if (!this.isTabActive || APP_STATE.reducedEffects) return;
+
+        const elapsedTime = this.clock.getElapsedTime();
+
+        // Smooth mouse parallax lerp
+        this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.04;
+        this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.04;
+
+        this.camera.position.x = this.mouse.x * 1.8;
+        this.camera.position.y = 3 - (this.mouse.y * 1.2);
+        this.camera.lookAt(0, 1.2, 0);
+
+        // Slow central island orbital rotation
+        this.islandsGroup.rotation.y = elapsedTime * 0.05;
+
+        // Monolith pulsing
+        if (this.monolith) {
+          this.monolith.rotation.y = elapsedTime * 0.2;
+        }
+
+        // Robotic drone floating hover
+        if (this.drone) {
+          this.drone.position.y = 2.2 + Math.sin(elapsedTime * 2.5) * 0.2;
+          this.drone.position.x = 3.2 + Math.cos(elapsedTime * 1.5) * 0.15;
+        }
+
+        // Hover crystals bobbing & rotating
+        this.crystals.forEach((c, index) => {
+          c.rotation.y += 0.02;
+          c.rotation.x += 0.01;
+          c.position.y += Math.sin(elapsedTime * 2 + index) * 0.003;
+        });
+
+        // Ambient particles rotation
+        if (this.starParticles) {
+          this.starParticles.rotation.y = elapsedTime * 0.015;
+        }
+
+        this.renderer.render(this.scene, this.camera);
+      }
+
+      destroy() {
+        if (this.animationFrameId) cancelAnimationFrame(this.animationFrameId);
+        if (this.renderer) {
+          this.renderer.dispose();
+          if (this.renderer.domElement && this.renderer.domElement.parentNode) {
+            this.renderer.domElement.parentNode.removeChild(this.renderer.domElement);
+          }
+        }
+      }
+    }
+
+    let heroSceneInstance = null;
+
+    function setupNavigationAndUI() {
+      // Dynamic footer year
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      // YouTube Link configuration
+      const ytLink = document.getElementById('navYoutubeBtn');
+      if (STUDIO_CONFIG.youtubeUrl) {
+        ytLink.href = STUDIO_CONFIG.youtubeUrl;
+      } else {
+        ytLink.href = "https://www.youtube.com/";
+        ytLink.title = "YouTube: Configure in STUDIO_CONFIG";
+      }
+
+      // Stats
+      document.getElementById('statProjects').textContent = STUDIO_CONFIG.stats.projects;
+      document.getElementById('statDeveloper').textContent = STUDIO_CONFIG.stats.developer;
+      document.getElementById('statIdeas').textContent = STUDIO_CONFIG.stats.ideas;
+
+      // Email fallback link
+      document.getElementById('emailDirectLink').href = `mailto:${STUDIO_CONFIG.contactEmail}`;
+
+      // Navbar scroll effects
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          navbar.classList.add('bg-[#050611]/90', 'backdrop-blur-md', 'border-blue-500/20', 'shadow-2xl');
+        } else {
+          navbar.classList.remove('bg-[#050611]/90', 'backdrop-blur-md', 'border-blue-500/20', 'shadow-2xl');
+        }
+      });
+
+      // Mobile Menu Toggle
+      const mobileBtn = document.getElementById('mobileMenuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileBtn.addEventListener('click', () => {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        if (isOpen) {
+          mobileMenu.classList.add('hidden');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          mobileMenu.classList.remove('hidden');
+          mobileBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      // Close mobile menu upon clicking links
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Active Navigation Section Tracking
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+      window.addEventListener('scroll', () => {
+        let current = '';
+        const scrollPosition = window.scrollY + 200;
+        sections.forEach(sec => {
+          const top = sec.offsetTop;
+          const height = sec.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            current = sec.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          if (link.getAttribute('data-section') === current) {
+            link.classList.add('text-cyan-400', 'font-bold');
+            link.classList.remove('text-brand-muted');
+          } else {
+            link.classList.remove('text-cyan-400', 'font-bold');
+            link.classList.add('text-brand-muted');
+          }
+        });
+      });
+
+      // Back to Top Button
+      const backTop = document.getElementById('backToTopBtn');
+      backTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Game Category Filter Buttons
+      const filterBtns = document.querySelectorAll('.game-filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          audioSynth.playBlip(550, 0.05);
+          filterBtns.forEach(b => {
+            b.classList.remove('bg-cyan-500', 'text-black', 'font-bold', 'shadow-neon-cyan');
+            b.classList.add('bg-[#0B1024]', 'text-brand-muted', 'border', 'border-white/10');
+          });
+          btn.classList.add('bg-cyan-500', 'text-black', 'font-bold', 'shadow-neon-cyan');
+          btn.classList.remove('bg-[#0B1024]', 'text-brand-muted', 'border', 'border-white/10');
+
+          renderGames(btn.getAttribute('data-filter'));
+        });
+      });
+
+      // Modal Events (Close on Escape & Outside Click)
+      document.getElementById('closeModalBtn').addEventListener('click', closeGameModal);
+      document.getElementById('gameModal').addEventListener('click', (e) => {
+        if (e.target.id === 'gameModal') closeGameModal();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeGameModal();
+        }
+      });
+
+      // Reduce Effects Toggle
+      const fxBtn = document.getElementById('toggleEffectsBtn');
+      const mobileFxBtn = document.getElementById('mobileToggleEffectsBtn');
+      
+      function updateFxUI() {
+        const text = APP_STATE.reducedEffects ? 'FX: OFF' : 'FX: ON';
+        fxBtn.textContent = text;
+        mobileFxBtn.textContent = text;
+        if (APP_STATE.reducedEffects) {
+          document.body.classList.add('reduced-effects');
+        } else {
+          document.body.classList.remove('reduced-effects');
+        }
+      }
+
+      function toggleFx() {
+        APP_STATE.reducedEffects = !APP_STATE.reducedEffects;
+        localStorage.setItem('lms_reduced_effects', APP_STATE.reducedEffects);
+        updateFxUI();
+        if (APP_STATE.reducedEffects && heroSceneInstance) {
+          document.getElementById('webgl-fallback').classList.remove('hidden');
+        } else if (!APP_STATE.reducedEffects && heroSceneInstance) {
+          document.getElementById('webgl-fallback').classList.add('hidden');
+        }
+      }
+
+      fxBtn.addEventListener('click', toggleFx);
+      mobileFxBtn.addEventListener('click', toggleFx);
+      updateFxUI();
+
+      // 3D Card Tilt for Developer Portrait
+      const portrait = document.getElementById('portraitCard');
+      if (portrait && !window.matchMedia('(pointer: coarse)').matches) {
+        portrait.addEventListener('mousemove', (e) => {
+          if (APP_STATE.reducedEffects) return;
+          const rect = portrait.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          portrait.style.transform = `perspective(800px) rotateX(${-y * 0.05}deg) rotateY(${x * 0.05}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+        portrait.addEventListener('mouseleave', () => {
+          portrait.style.transform = `perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+      }
+
+      // Desktop Cyber Cursor Tracker
+      const cursor = document.getElementById('customCursor');
+      const dot = document.getElementById('customCursorDot');
+      if (cursor && dot && !window.matchMedia('(pointer: coarse)').matches) {
+        window.addEventListener('mousemove', (e) => {
+          cursor.style.left = `${e.clientX}px`;
+          cursor.style.top = `${e.clientY}px`;
+          dot.style.left = `${e.clientX}px`;
+          dot.style.top = `${e.clientY}px`;
+        });
+
+        // Hover reactions on clickable items
+        document.querySelectorAll('a, button, input, textarea, .game-card').forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+      }
+    }
+
+    window.addEventListener('load', () => {
+      // 1. Render data driven components
+      renderGames("all");
+      renderTimeline();
+      setupContactForm();
+      setupNavigationAndUI();
+
+      // 2. Launch Three.js hero world
+      heroSceneInstance = new HeroThreeScene();
+      heroSceneInstance.init();
+    });
+  </script>
+</body>
+</html>
